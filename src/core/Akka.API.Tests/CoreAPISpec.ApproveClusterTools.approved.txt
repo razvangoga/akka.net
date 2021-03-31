@@ -1,4 +1,5 @@
-﻿[assembly: System.Runtime.CompilerServices.InternalsVisibleToAttribute("Akka.Cluster.Tools.Tests")]
+﻿[assembly: System.Reflection.AssemblyMetadataAttribute("RepositoryUrl", "https://github.com/akkadotnet/akka.net")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleToAttribute("Akka.Cluster.Tools.Tests")]
 [assembly: System.Runtime.CompilerServices.InternalsVisibleToAttribute("Akka.Cluster.Tools.Tests.MultiNode")]
 [assembly: System.Runtime.InteropServices.ComVisibleAttribute(false)]
 [assembly: System.Runtime.InteropServices.GuidAttribute("5cf8a8be-b634-473f-bb01-eba878746bd4")]
@@ -228,7 +229,7 @@ namespace Akka.Cluster.Tools.PublishSubscribe
         public static Akka.Cluster.Tools.PublishSubscribe.GetTopics Instance { get; }
     }
     public interface IDistributedPubSubMessage { }
-    public sealed class Publish : Akka.Cluster.Tools.PublishSubscribe.IDistributedPubSubMessage, System.IEquatable<Akka.Cluster.Tools.PublishSubscribe.Publish>
+    public sealed class Publish : Akka.Actor.IWrappedMessage, Akka.Cluster.Tools.PublishSubscribe.IDistributedPubSubMessage, System.IEquatable<Akka.Cluster.Tools.PublishSubscribe.Publish>
     {
         public Publish(string topic, object message, bool sendOneMessageToEachGroup = False) { }
         public object Message { get; }
@@ -257,7 +258,7 @@ namespace Akka.Cluster.Tools.PublishSubscribe
         public override int GetHashCode() { }
         public override string ToString() { }
     }
-    public sealed class Send : Akka.Cluster.Tools.PublishSubscribe.IDistributedPubSubMessage, System.IEquatable<Akka.Cluster.Tools.PublishSubscribe.Send>
+    public sealed class Send : Akka.Actor.IWrappedMessage, Akka.Cluster.Tools.PublishSubscribe.IDistributedPubSubMessage, System.IEquatable<Akka.Cluster.Tools.PublishSubscribe.Send>
     {
         public Send(string path, object message, bool localAffinity = False) { }
         public bool LocalAffinity { get; }
@@ -268,7 +269,7 @@ namespace Akka.Cluster.Tools.PublishSubscribe
         public override int GetHashCode() { }
         public override string ToString() { }
     }
-    public sealed class SendToAll : Akka.Cluster.Tools.PublishSubscribe.IDistributedPubSubMessage, System.IEquatable<Akka.Cluster.Tools.PublishSubscribe.SendToAll>
+    public sealed class SendToAll : Akka.Actor.IWrappedMessage, Akka.Cluster.Tools.PublishSubscribe.IDistributedPubSubMessage, System.IEquatable<Akka.Cluster.Tools.PublishSubscribe.SendToAll>
     {
         public SendToAll(string path, object message, bool excludeSelf = False) { }
         public bool ExcludeSelf { get; }
